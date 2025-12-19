@@ -1,18 +1,19 @@
-import type { Candidate } from '@/types/candidate'
+import type { User } from '@/types/user'
 import {
   EyeOutlined,
   IdcardOutlined,
   ManOutlined,
+  StarFilled,
   UserOutlined,
-  WomanOutlined,
+  WomanOutlined
 } from '@ant-design/icons'
 import { Avatar, Button, Table, Tag, Typography } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 
 const { Text } = Typography
 
-interface CandidateTableProps {
-  data: Candidate[]
+interface UserTableProps {
+  data: User[]
   loading: boolean
   pagination: {
     current: number
@@ -20,17 +21,17 @@ interface CandidateTableProps {
     total: number
   }
   onTableChange: (pagination: TablePaginationConfig) => void
-  onViewDetail: (record: Candidate) => void
+  onViewDetail: (record: User) => void
 }
 
-const CandidateTable = ({
+const UserTable = ({
   data,
   loading,
   pagination,
   onTableChange,
   onViewDetail,
-}: CandidateTableProps) => {
-  const columns: ColumnsType<Candidate> = [
+}: UserTableProps) => {
+  const columns: ColumnsType<User> = [
     {
       title: 'Mã căn cước',
       dataIndex: 'idCardNumber',
@@ -58,6 +59,15 @@ const CandidateTable = ({
             {record.fullName}
           </Text>
         </div>
+      ),
+    },
+    {
+      title: 'Số điện thoại',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+      width: 100,
+      render: (phoneNumber: string) => (
+        <Text className="text-gray-600">{phoneNumber}</Text>
       ),
     },
     {
@@ -117,6 +127,18 @@ const CandidateTable = ({
       ),
     },
     {
+      title: 'Đánh giá',
+      dataIndex: 'rating',
+      key: 'rating',
+      width: 100,
+      render: (rating: number) => (
+        <div className="flex items-center gap-2">
+          <Text className="text-gray-600">{rating} / 5</Text>
+          <StarFilled style={{ color: '#FFD700' }} />
+        </div>
+      ),
+    },  
+    {
       title: 'Thao tác',
       key: 'action',
       width: 120,
@@ -156,5 +178,5 @@ const CandidateTable = ({
   )
 }
 
-export default CandidateTable
+export default UserTable
 

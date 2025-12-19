@@ -2,12 +2,11 @@ import {
   BarChartOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
-  ExclamationCircleOutlined,
-  FileProtectOutlined,
   FileTextOutlined,
   LinkOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  ReconciliationOutlined,
   SearchOutlined,
   SettingOutlined,
   TeamOutlined,
@@ -28,75 +27,39 @@ const menuItems: MenuItem[] = [
     label: 'Tổng quan',
   },
   {
-    key: 'candidate',
+    key: '/nguoi-dung',
     icon: <TeamOutlined />,
-    label: 'Người lao động',
+    label: 'Người dùng'
+  },
+  {
+    key: '/tin-tuc',
+    icon: <ReconciliationOutlined />,
+    label: 'Tin tức',
     children: [
       {
-        key: '/candidate-list',
-        icon: <TeamOutlined />,
-        label: 'Danh sách người lao động',
+        key: '/tin-tuyen-dung',
+        icon: <SearchOutlined />,
+        label: 'Danh sách tin tuyển dụng',
       },
       {
-        key: '/job-seeker-list',
+        key: '/tin-tim-viec',
         icon: <SearchOutlined />,
-        label: 'Danh sách người tìm việc',
+        label: 'Danh sách tin tìm việc',
       },
     ],
   },
   {
-    key: 'recruiter',
-    icon: <TeamOutlined />,
-    label: 'Nhà tuyển dụng',
-    children: [
-      {
-        key: '/recruiter-list',
-        icon: <TeamOutlined />,
-        label: 'Danh sách nhà tuyển dụng',
-      },
-      {
-        key: '/recruitment-list',
-        icon: <SearchOutlined />,
-        label: 'Danh sách việc tìm người',
-      },
-    ],
-  },
-  {
-    key: 'connection',
+    key: '/cam-ket-dien-tu',
     icon: <LinkOutlined />,
-    label: 'Kết nối',
-    children: [
-      {
-        key: '/successful-connections',
-        icon: <LinkOutlined />,
-        label: 'Kết nối thành công',
-      },
-      {
-        key: '/e-commitments',
-        icon: <FileProtectOutlined />,
-        label: 'Cam kết điện tử',
-      },
-    ],
+    label: 'Cam kết'
   },
   {
-    key: 'review',
+    key: '/tranh-chap',
     icon: <WarningOutlined />,
-    label: 'Xét duyệt',
-    children: [
-      {
-        key: '/suspicious-posts',
-        icon: <WarningOutlined />,
-        label: 'Tin nghi ngờ',
-      },
-      {
-        key: '/disputes',
-        icon: <ExclamationCircleOutlined />,
-        label: 'Tranh chấp',
-      },
-    ],
+    label: 'Tranh chấp',
   },
   {
-    key: 'analytics',
+    key: '/thong-ke',
     icon: <BarChartOutlined />,
     label: 'Thống kê',
     children: [
@@ -162,37 +125,36 @@ const Sidebar = ({ collapsed, onCollapse }: SidebarProps) => {
       }}
     >
       <div className="h-full flex flex-col justify-between">
-      <div>
-        {/* Logo */}
-        <div className="h-20 flex items-center justify-center border-b border-gray-200 bg-white">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              alt="Logo"
-              className={`${collapsed ? 'w-10 h-10' : 'w-12 h-12'} object-contain transition-all duration-300`}
-            />
-            {!collapsed && (
-              <div className="flex flex-col">
-                <span className="font-bold text-red-600 text-sm leading-tight">BỘ LĐTBXH</span>
-                <span className="text-xs text-gray-500">WorkLink</span>
-              </div>
-            )}
+        <div>
+          {/* Logo */}
+          <div className="h-20 flex items-center justify-center border-b border-gray-200 bg-white">
+            <div className="flex items-center gap-3">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className={`${collapsed ? 'w-10 h-10' : 'w-12 h-12'} object-contain transition-all duration-300`}
+              />
+              {!collapsed && (
+                <div className="flex flex-col">
+                  <span className="font-bold text-red-600 text-sm leading-tight">BỘ LĐTBXH</span>
+                  <span className="text-xs text-gray-500">WorkLink</span>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Menu */}
-        <Menu
-          mode="inline"
-          selectedKeys={[location.pathname]}
-          // defaultOpenKeys={['registration', 'connection', 'review', 'analytics']}
-          items={menuItems}
-          onClick={handleMenuClick}
-          className="border-none mt-2"
-          style={{
-            background: 'transparent',
-          }}
-        />
-      </div>
+          {/* Menu */}
+          <Menu
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            items={menuItems}
+            onClick={handleMenuClick}
+            className="border-none mt-2"
+            style={{
+              background: 'transparent',
+            }}
+          />
+        </div>
       </div>
 
     </Sider>

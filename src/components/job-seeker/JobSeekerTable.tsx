@@ -71,16 +71,21 @@ const JobSeekerTable = ({
       render: (_, record) => (
         <div className="flex gap-2">
           <div className="shrink-0 flex items-center">
-          <Avatar
-            size={32}
-            icon={<UserOutlined />}
-            className={record.owner.gender === 'Nam' ? 'bg-blue-500!' : 'bg-pink-500!'}
-          />
-          <div>
-            <div className="font-medium text-gray-800 text-sm">{record.owner.fullName}</div>
+            <Avatar
+              size={32}
+              icon={<UserOutlined />}
+              className={record.owner.gender === 'Nam' ? 'bg-blue-500!' : 'bg-pink-500!'}
+            />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className="font-medium text-gray-800 text-sm truncate"
+              title={record.owner.fullName}
+            >
+              {record.owner.fullName}
+            </div>
             <div className="text-xs text-gray-500">{record.owner.dateOfBirth}</div>
           </div>
-        </div>
         </div>
       ),
     },

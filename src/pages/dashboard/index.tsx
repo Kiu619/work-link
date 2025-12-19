@@ -303,7 +303,7 @@ const Dashboard = () => {
         <Progress
           percent={statsData.disputeRate}
           strokeColor="#16a34a"
-          trailColor="#e5e7eb"
+          railColor ="#e5e7eb"
           showInfo={false}
           size={['100%', 12]}
         />

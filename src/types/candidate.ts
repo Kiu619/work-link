@@ -1,33 +1,34 @@
 import type { ApiResponse } from './api-response'
 
+// Candidate (Người lao động)
 export interface Candidate {
   userId: string
-  idCardNumber: string
-  frontIdCardImage: string
-  backIdCardImage: string
   fullName: string
   gender: string
   dateOfBirth: string
-  nationality: string
-  placeOfOrigin: string
-  placeOfResidence: string
+  location: string
+  rating: number
 }
 
+// Candidate List Data
 export interface CandidateListData {
   page: number
   maxSize: number
-  totalElement: number
+  totalElements: number
   totalPages: number
   data: Candidate[]
 }
 
+// Candidate List Response
 export interface CandidateListResponse extends ApiResponse<CandidateListData> {
   data: CandidateListData
 }
 
+// Candidate List Params
 export interface CandidateListParams {
   page?: number
   maxSize?: number
-  search?: string    // Tìm kiếm theo tên, ID, địa chỉ
-  gender?: string    // Lọc theo giới tính: 'Nam' | 'Nữ'
+  search?: string
+  gender?: string
 }
+

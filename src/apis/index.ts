@@ -3,6 +3,7 @@ import type { CandidateListParams, CandidateListResponse } from '@/types/candida
 import type { JobPostListParams, JobPostListResponse, UpdateJobPostStatusRequest, UpdateJobPostStatusResponse } from '@/types/job-post'
 import type { RecruitmentListParams, RecruitmentListResponse, UpdateRecruitmentStatusRequest, UpdateRecruitmentStatusResponse } from '@/types/recruitment'
 import type { CommitmentListParams, CommitmentListResponse } from '@/types/commitment'
+import type { ComplaintListParams, ComplaintListResponse, UpdateComplaintVerdictRequest, UpdateComplaintVerdictResponse } from '@/types/dispute'
 import authorizedAxiosInstance from '@/utils/authorizedAxios'
 
 const loginApi = async (phoneNumber: string, password: string): Promise<LoginResponse> => {
@@ -97,6 +98,29 @@ const getCommitmentsApi = async (params?: CommitmentListParams): Promise<Commitm
   return response.data
 }
 
+// Dispute/Complaint APIs
+const getComplaintsApi = async (params?: ComplaintListParams): Promise<ComplaintListResponse> => {
+  const response = await authorizedAxiosInstance.get<ComplaintListResponse>(
+    '/government-service/v1/reviews',
+    {
+      params: {
+        page: params?.page ?? 1,
+        maxSize: params?.maxSize ?? 20,
+        status: params?.status || undefined,
+      }
+    }
+  )
+  return response.data
+}
+
+const updateComplaintVerdictApi = async (data: UpdateComplaintVerdictRequest): Promise<UpdateComplaintVerdictResponse> => {
+  const response = await authorizedAxiosInstance.put<UpdateComplaintVerdictResponse>(
+    '/government-service/v1/reviews/verdict',
+    data
+  )
+  return response.data
+}
+
 export { 
   loginApi, 
   logoutApi, 
@@ -105,5 +129,7 @@ export {
   updateJobPostStatusApi,
   getRecruiterJobPostsApi,
   updateRecruitmentStatusApi,
-  getCommitmentsApi
+  getCommitmentsApi,
+  getComplaintsApi,
+  updateComplaintVerdictApi
 }

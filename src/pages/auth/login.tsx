@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { loginApi } from '@/apis'
 import { useAdminStore } from '@/store/admin'
 import type { ApiResponse } from '@/types/api-response'
-
 interface LoginForm {
   phoneNumber: string
   password: string

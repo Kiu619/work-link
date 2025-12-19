@@ -1,11 +1,12 @@
 import type { ApiResponse } from './api-response'
 
-export interface Recruiter {
+export interface User {
   userId: string
   idCardNumber: string
   frontIdCardImage: string
   backIdCardImage: string
   fullName: string
+  phoneNumber: string
   gender: string
   dateOfBirth: string
   nationality: string
@@ -14,19 +15,19 @@ export interface Recruiter {
   rating: number
 }
 
-export interface RecruiterListData {
+export interface UserListData {
   page: number
   maxSize: number
   totalElement: number
   totalPages: number
-  data: Recruiter[]
+  data: User[]
 }
 
-export interface RecruiterListResponse extends ApiResponse<RecruiterListData> {
-  data: RecruiterListData
+export interface UserListResponse extends ApiResponse<UserListData> {
+  data: UserListData
 }
 
-export interface RecruiterListParams {
+export interface UserListParams {
   page?: number
   maxSize?: number
   search?: string    // Tìm kiếm theo tên, ID, địa chỉ

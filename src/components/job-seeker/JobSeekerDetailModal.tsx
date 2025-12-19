@@ -108,6 +108,10 @@ const JobSeekerDetailModal = ({
       }
       width={900}
       centered
+      style={{ 
+        marginTop: '20px',
+        marginBottom: '20px'
+       }}
     >
       <div className="flex flex-col gap-6 pt-4">
         {/* Owner Info */}
@@ -120,7 +124,7 @@ const JobSeekerDetailModal = ({
             />
             <div className="flex-1">
               <Title level={5} className="mb-1!">{post.owner.fullName}</Title>
-              <Space split={<span className="text-gray-300">|</span>}>
+              <Space separator={<span className="text-gray-300">|</span>}>
                 <Tag
                   icon={post.owner.gender === 'Nam' ? <ManOutlined /> : <WomanOutlined />}
                   color={post.owner.gender === 'Nam' ? 'blue' : 'pink'}
@@ -172,7 +176,7 @@ const JobSeekerDetailModal = ({
           <Descriptions.Item label="Mức lương mong muốn" span={3}>
             <Text className="text-green-600 font-semibold text-lg">
               <DollarOutlined className="mr-1" />
-              {post.salaryMin.toLocaleString('vi-VN')}đ - {post.salaryMax.toLocaleString('vi-VN')}đ
+              {post?.salaryMin?.toLocaleString('vi-VN')}đ - {post?.salaryMax?.toLocaleString('vi-VN')}đ
             </Text>
           </Descriptions.Item>
           <Descriptions.Item label="Thời gian có thể làm" span={3}>

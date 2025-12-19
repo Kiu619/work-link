@@ -1,6 +1,5 @@
 import type { Commitment } from '@/types/commitment'
 import {
-  AimOutlined,
   CalendarOutlined,
   DollarOutlined,
   EnvironmentOutlined,
@@ -10,7 +9,6 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import {
-  Button,
   Card,
   Col,
   Descriptions,
@@ -18,84 +16,17 @@ import {
   Modal,
   Row,
   Tag,
-  Tooltip,
   Typography
 } from 'antd'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import { useEffect } from 'react'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import Map from '@/components/Map'
 
 const { Title, Text, Paragraph } = Typography
 
-// Fix for default marker icon in Leaflet with Vite
-const icon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-})
 
 // Fallback image
 const FALLBACK_IMAGE =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
 
-// Component to fix map size issue in modal and add center button
-interface MapControlsProps {
-  lat: number
-  lng: number
-}
-
-const MapControls = ({ lat, lng }: MapControlsProps) => {
-  const map = useMap()
-  
-  useEffect(() => {
-    // Delay để đảm bảo modal animation hoàn thành
-    const timer1 = setTimeout(() => {
-      map.invalidateSize()
-    }, 200)
-    
-    // Thêm delay thứ 2 để chắc chắn
-    const timer2 = setTimeout(() => {
-      map.invalidateSize()
-    }, 500)
-    
-    // Thêm listener cho resize window
-    const handleResize = () => {
-      map.invalidateSize()
-    }
-    window.addEventListener('resize', handleResize)
-    
-    return () => {
-      clearTimeout(timer1)
-      clearTimeout(timer2)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [map])
-  
-  const handleCenterClick = () => {
-    map.flyTo([lat, lng], 15, {
-      duration: 0.5
-    })
-  }
-  
-  return (
-    <div className="absolute top-2 right-2 z-10000">
-      <Tooltip title="Về vị trí đánh dấu">
-        <Button
-          type="primary"
-          size="small"
-          icon={<AimOutlined />}
-          onClick={handleCenterClick}
-          className="shadow-lg"
-        />
-      </Tooltip>
-    </div>
-  )
-}
 
 interface CommitmentDetailModalProps {
   open: boolean
@@ -293,34 +224,24 @@ const CommitmentDetailModal = ({ open, commitment, onClose }: CommitmentDetailMo
               </div>
             }
           >
-            <div className="h-[300px] rounded-lg overflow-hidden relative">
-              <MapContainer
-                center={[commitment.job.workLatitude!, commitment.job.workLongitude!]}
-                zoom={15}
-                style={{ height: '100%', width: '100%' }}
-              >
-                <MapControls 
-                  lat={commitment.job.workLatitude!} 
-                  lng={commitment.job.workLongitude!} 
-                />
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker 
-                  position={[commitment.job.workLatitude!, commitment.job.workLongitude!]}
-                  icon={icon}
-                >
-                  <Popup>
+            <Map
+              center={[commitment.job.workLatitude!, commitment.job.workLongitude!]}
+              zoom={15}
+              height={300}
+              showCenterButton={true}
+              markers={[
+                {
+                  position: [commitment.job.workLatitude!, commitment.job.workLongitude!],
+                  popupContent: (
                     <div className="text-center">
                       <strong>{commitment.job.title}</strong>
                       <br />
                       <small>{commitment.job.workAddress}</small>
                     </div>
-                  </Popup>
-                </Marker>
-              </MapContainer>
-            </div>
+                  ),
+                },
+              ]}
+            />
           </Card>
         )}
 

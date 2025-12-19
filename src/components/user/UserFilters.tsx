@@ -1,19 +1,19 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Input, Select } from 'antd'
 
-interface RecruiterFiltersProps {
+interface UserFiltersProps {
   searchText: string
   genderFilter: string | undefined
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onGenderChange: (value: string | undefined) => void
 }
 
-const RecruiterFilters = ({
+const UserFilters = ({
   searchText,
   genderFilter,
   onSearchChange,
   onGenderChange,
-}: RecruiterFiltersProps) => {
+}: UserFiltersProps) => {
   return (
     <div className="flex flex-col md:flex-row gap-4 mb-4">
       <Input
@@ -39,5 +39,5 @@ const RecruiterFilters = ({
   )
 }
 
-export default RecruiterFilters
+export default UserFilters
 

@@ -2,18 +2,18 @@ import { StatsCard } from '@/components/common'
 import { ManOutlined, TeamOutlined, WomanOutlined } from '@ant-design/icons'
 import { Col, Row } from 'antd'
 
-interface RecruiterStatsProps {
+interface UserStatsProps {
   total: number
   male: number
   female: number
 }
 
-const RecruiterStats = ({ total, male, female }: RecruiterStatsProps) => {
+const UserStats = ({ total, male, female }: UserStatsProps) => {
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} sm={8}>
         <StatsCard
-          title="Tổng nhà tuyển dụng"
+          title="Tổng người dùng"
           value={total}
           icon={<TeamOutlined />}
           iconBgColor="bg-blue-100"
@@ -45,5 +45,5 @@ const RecruiterStats = ({ total, male, female }: RecruiterStatsProps) => {
   )
 }
 
-export default RecruiterStats
+export default UserStats
 

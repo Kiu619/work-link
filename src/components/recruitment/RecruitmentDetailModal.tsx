@@ -110,6 +110,11 @@ const RecruitmentDetailModal = ({
       }
       width={900}
       centered
+      style={{ 
+        marginTop: '20px',
+        marginBottom: '20px'
+       }}
+      destroyOnHidden
     >
       <div className="flex flex-col gap-6 pt-4">
         {/* Owner Info */}
@@ -179,7 +184,7 @@ const RecruitmentDetailModal = ({
           <Descriptions.Item label="Mức lương" span={3}>
             <Text className="text-green-600 font-semibold text-lg">
               <DollarOutlined className="mr-1" />
-              {post.salaryMin.toLocaleString('vi-VN')}đ - {post.salaryMax.toLocaleString('vi-VN')}đ
+              {post?.salaryMin?.toLocaleString('vi-VN')}đ - {post?.salaryMax?.toLocaleString('vi-VN')}đ
             </Text>
           </Descriptions.Item>
           <Descriptions.Item label="Hạn nộp đơn" span={1}>
